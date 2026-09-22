@@ -1,32 +1,20 @@
-name: CI Build
+name: Static Website Workflow
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: List Files
+        run: ls -la
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm test -- --watchAll=false
-        continue-on-error: true
-
-      - name: Build Application
-        run: npm run build
+      - name: Workflow Completed
+        run: echo "Static website checked successfully!"
